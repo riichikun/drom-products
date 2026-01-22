@@ -41,7 +41,6 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 final class UpdateDromProductsDescriptionHandlerTest extends KernelTestCase
 {
     #[DependsOnClass(DromProductNewTest::class)]
-    #[DependsOnClass(DromProductImagesEditTest::class)]
     public function testUseCase(): void
     {
         $profile = new UserProfileUid(UserProfileUid::TEST);

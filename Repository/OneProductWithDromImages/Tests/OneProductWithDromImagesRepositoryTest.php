@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace BaksDev\Drom\Products\Repository\OneProductWithDromImages\Tests;
 
-use BaksDev\Drom\Products\Repository\AllProductsWithDromImage\AllProductsWithDromImagesResult;
 use BaksDev\Drom\Products\Repository\OneProductWithDromImages\OneProductWithDromImagesInterface;
 use BaksDev\Drom\Products\Repository\OneProductWithDromImages\OneProductWithDromImagesRepository;
 use BaksDev\Drom\Products\Repository\OneProductWithDromImages\OneProductWithDromImagesResult;

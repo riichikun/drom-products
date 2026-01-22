@@ -31,6 +31,8 @@ use BaksDev\Drom\Products\UseCase\Delete\DromProductDeleteDTO;
 use BaksDev\Drom\Products\UseCase\Delete\DromProductDeleteHandler;
 use BaksDev\Drom\Products\UseCase\NewEdit\Images\Tests\DromProductImagesEditTest;
 use Baksdev\Drom\Products\UseCase\UpdateDescription\Tests\UpdateDromProductsDescriptionHandlerTest;
+use BaksDev\Drom\UseCase\Admin\Delete\Tests\DromTokenDeleteTest;
+use BaksDev\Products\Product\UseCase\Admin\Delete\Tests\ProductsProductDeleteAdminUseCaseTest;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\DependsOnClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -79,6 +81,7 @@ class DromProductDeleteTest extends KernelTestCase
             ->getRepository(DromProduct::class)
             ->find(DromProductUid::TEST);
 
+        /** Удаляем тестовый продукт Drom */
         if($product)
         {
             $em->remove($product);
@@ -104,5 +107,13 @@ class DromProductDeleteTest extends KernelTestCase
         {
             $fileSystem->remove($testUploadDir);
         }
+
+        
+        /** Удаляем тестовый продукт после завершения */
+        ProductsProductDeleteAdminUseCaseTest::tearDownAfterClass();
+
+
+        /** Удаляем тестовый токен Drom */
+        DromTokenDeleteTest::tearDownAfterClass();
     }
 }

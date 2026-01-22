@@ -25,13 +25,13 @@ declare(strict_types=1);
 
 namespace BaksDev\Drom\Products\UseCase\NewEdit\Tests;
 
-use BaksDev\Drom\Products\Controller\Admin\Tests\DromProductIndexAdminControllerTest;
 use BaksDev\Drom\Products\Entity\DromProduct;
 use BaksDev\Drom\Products\Entity\Images\DromProductImage;
 use BaksDev\Drom\Products\Type\Id\DromProductUid;
 use BaksDev\Drom\Products\UseCase\NewEdit\DromProductDTO;
 use BaksDev\Drom\Products\UseCase\NewEdit\DromProductHandler;
 use BaksDev\Drom\Products\UseCase\NewEdit\Images\DromProductImagesDTO;
+use BaksDev\Drom\UseCase\Admin\NewEdit\Tests\DromTokenNewTest;
 use BaksDev\Products\Product\Type\Id\ProductUid;
 use BaksDev\Products\Product\Type\Offers\ConstId\ProductOfferConst;
 use BaksDev\Products\Product\Type\Offers\Variation\ConstId\ProductVariationConst;
@@ -39,24 +39,17 @@ use BaksDev\Products\Product\Type\Offers\Variation\Modification\ConstId\ProductM
 use BaksDev\Products\Product\UseCase\Admin\NewEdit\Tests\ProductsProductNewAdminUseCaseTest;
 use BaksDev\Users\Profile\UserProfile\Type\Id\UserProfileUid;
 use Doctrine\ORM\EntityManagerInterface;
-use PHPUnit\Framework\Attributes\DependsOnClass;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
 #[When(env: 'test')]
-#[Group('drom')]
-#[Group('drom-repository')]
 #[Group('drom-products')]
 #[Group('drom-products-controller')]
 #[Group('drom-products-repository')]
 #[Group('drom-products-usecase')]
-#[Group('drom-board')]
-#[Group('drom-board-repository')]
 final class DromProductNewTest extends KernelTestCase
 {
-    #[DependsOnClass(DromProductIndexAdminControllerTest::class)]
-    #[DependsOnClass(ProductsProductNewAdminUseCaseTest::class)]
     public static function setUpBeforeClass(): void
     {
         $container = self::getContainer();
@@ -83,10 +76,16 @@ final class DromProductNewTest extends KernelTestCase
 
         $EntityManager->flush();
         $EntityManager->clear();
+
+        /** Создаем тестовый продукт */
+        ProductsProductNewAdminUseCaseTest::setUpBeforeClass();
+        new ProductsProductNewAdminUseCaseTest('')->testUseCase();
+
+        /** Создаем тестовый токен Drom */
+        DromTokenNewTest::setUpBeforeClass();
+        new DromTokenNewTest('')->testNew();
     }
 
-    #[DependsOnClass(DromProductIndexAdminControllerTest::class)]
-    #[DependsOnClass(ProductsProductNewAdminUseCaseTest::class)]
     public function testNew(): void
     {
         $dromProductDTO = new DromProductDTO();

@@ -27,7 +27,7 @@ namespace BaksDev\Drom\Products\Repository\AllProductsIdentifierByDromMapper\Tes
 
 use BaksDev\Drom\Products\Repository\AllProductsIdentifierByDromMapper\AllProductsWithDromMapperInterface;
 use BaksDev\Drom\Products\Repository\AllProductsIdentifierByDromMapper\AllProductsWithDromMapperResult;
-use BaksDev\Drom\UseCase\Admin\NewEdit\Tests\DromTokenNewTest;
+use BaksDev\Drom\Products\UseCase\NewEdit\Tests\DromProductNewTest;
 use BaksDev\Users\Profile\UserProfile\Type\Id\UserProfileUid;
 use PHPUnit\Framework\Attributes\DependsOnClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -41,7 +41,7 @@ use Symfony\Component\DependencyInjection\Attribute\When;
 #[Group('drom-products-repository')]
 class AllProductsWithDromMapperRepositoryTest extends KernelTestCase
 {
-    #[DependsOnClass(DromTokenNewTest::class)]
+    #[DependsOnClass(DromProductNewTest::class)]
     public function testRepository(): void
     {
         /** @var AllProductsWithDromMapperInterface $AllProductsWithDromMapper */

@@ -31,14 +31,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
 #[When(env: 'test')]
-#[Group('drom')]
-#[Group('drom-repository')]
 #[Group('drom-products')]
 #[Group('drom-products-controller')]
 #[Group('drom-products-repository')]
 #[Group('drom-products-usecase')]
-#[Group('drom-board')]
-#[Group('drom-board-repository')]
 final class DromProductIndexAdminControllerTest extends WebTestCase
 {
     private const string URL = '/admin/drom/products';

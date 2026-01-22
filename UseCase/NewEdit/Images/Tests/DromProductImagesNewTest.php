@@ -27,10 +27,12 @@ namespace BaksDev\Drom\Products\UseCase\NewEdit\Images\Tests;
 
 use BaksDev\Drom\Products\BaksDevDromProductsBundle;
 use BaksDev\Drom\Products\Entity\DromProduct;
+use BaksDev\Drom\Products\Type\Id\DromProductUid;
 use BaksDev\Drom\Products\UseCase\NewEdit\DromProductDTO;
 use BaksDev\Drom\Products\UseCase\NewEdit\DromProductHandler;
 use BaksDev\Drom\Products\UseCase\NewEdit\Images\DromProductImagesDTO;
 use BaksDev\Drom\Products\UseCase\NewEdit\Tests\DromProductEditTest;
+use BaksDev\Drom\Products\UseCase\NewEdit\Tests\DromProductNewTest;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\DependsOnClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -41,16 +43,12 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
 #[When(env: 'test')]
-#[Group('drom')]
-#[Group('drom-repository')]
 #[Group('drom-products')]
 #[Group('drom-products-repository')]
 #[Group('drom-products-usecase')]
-#[Group('drom-board')]
-#[Group('drom-board-repository')]
 class DromProductImagesNewTest extends KernelTestCase
 {
-    #[DependsOnClass(DromProductEditTest::class)]
+    #[DependsOnClass(DromProductNewTest::class)]
     public function testNew(): void
     {
         $container = self::getContainer();
@@ -58,7 +56,7 @@ class DromProductImagesNewTest extends KernelTestCase
 
         $dromProduct = $EntityManager
             ->getRepository(DromProduct::class)
-            ->find('019bc113-4ced-7af5-8167-06be601051a4');
+            ->find(DromProductUid::TEST);
 
         self::assertNotNull($dromProduct);
 

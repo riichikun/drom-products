@@ -30,6 +30,7 @@ use BaksDev\Drom\Products\Repository\AllDromProducts\AllDromProductsRepository;
 use BaksDev\Drom\Products\Repository\AllDromProducts\AllDromProductsResult;
 use BaksDev\Drom\Products\UseCase\NewEdit\Tests\DromProductNewTest;
 use BaksDev\Products\Product\Type\Event\ProductEventUid;
+use BaksDev\Products\Product\Type\Id\ProductUid;
 use PHPUnit\Framework\Attributes\DependsOnClass;
 use ReflectionClass;
 use ReflectionMethod;
@@ -49,7 +50,7 @@ final class AllDromProductsRepositoryTest extends KernelTestCase
         $AllDromProductsRepository = self::getContainer()->get(AllDromProductsInterface::class);
 
         $result = $AllDromProductsRepository
-            ->product('01876b34-ed23-7c18-ba48-9071e8646a08')
+            ->product(new ProductUid(ProductUid::TEST))
             ->findAll();
 
         foreach ($result as $allDromProductsResult) {

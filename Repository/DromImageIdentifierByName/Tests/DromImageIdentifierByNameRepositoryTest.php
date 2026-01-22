@@ -40,7 +40,7 @@ class DromImageIdentifierByNameRepositoryTest extends KernelTestCase
         /** @var DromImageIdentifierByNameInterface $DromImageIdentifierByNameRepository */
         $DromImageIdentifierByNameRepository = self::getContainer()->get(DromImageIdentifierByNameInterface::class);
 
-        $result = $DromImageIdentifierByNameRepository->find('21f55b9523af7366d9f869587309970c');
+        $result = $DromImageIdentifierByNameRepository->find('test');
 
         //dump($result);
 

@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace BaksDev\Drom\Products\UseCase\NewEdit\Tests;
 
 use BaksDev\Drom\Products\Entity\DromProduct;
+use BaksDev\Drom\Products\Type\Id\DromProductUid;
 use BaksDev\Drom\Products\UseCase\NewEdit\DromProductDTO;
 use BaksDev\Drom\Products\UseCase\NewEdit\DromProductHandler;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,13 +36,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Attribute\When;
 
 #[When(env: 'test')]
-#[Group('drom')]
-#[Group('drom-repository')]
 #[Group('drom-products')]
 #[Group('drom-products-repository')]
 #[Group('drom-products-usecase')]
-#[Group('drom-board')]
-#[Group('drom-board-repository')]
 class DromProductEditTest extends KernelTestCase
 {
     #[DependsOnClass(DromProductNewTest::class)]
@@ -53,7 +50,7 @@ class DromProductEditTest extends KernelTestCase
         /** @var DromProduct $product */
         $product = $Em
             ->getRepository(DromProduct::class)
-            ->find('019bc113-4ced-7af5-8167-06be601051a4');
+            ->find(DromProductUid::TEST);
 
         self::assertNotNull($product);
 
